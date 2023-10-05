@@ -4,20 +4,12 @@ import { API_URL } from "../config";
 import { AppContext } from "../appcontextprovider";
 import Navbar from "./Navbar";
 
-
 const Login = () => {
     const { setIslogin, setUser } = useContext(AppContext);
 
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false)
-
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -38,7 +30,6 @@ const Login = () => {
         const response = await fetch(API_URL + '/login', {
             headers: h,
             method: 'POST',
-
             body: data,
         })
 
@@ -60,27 +51,6 @@ const Login = () => {
 
             alert('Login successfull');
             navigate('/dashboard');
-
-            headers: {
-                'Content-Type' : 'application/json'
-            }, 
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
-        const result = await response.json();
-
-        console.log(result?.data?.token);
-        console.log(result);
-        sessionStorage.setItem('token', result.data.token )
-         sessionStorage.getItem('token', result.data.token)  
-            navigate('/');
-            
-        setMessage(result.message);
-        if(!response.ok) {
-          throw(result)
-
         }
 
 
