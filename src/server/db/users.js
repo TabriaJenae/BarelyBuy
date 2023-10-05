@@ -10,7 +10,7 @@ const createUser = async({ name='first last', email, password }) => {
         VALUES($1, $2, $3)
         ON CONFLICT (email) DO NOTHING
         RETURNING *`, [name, email, hashedPassword]);
-
+        
         return user;
     } catch (err) {
         throw err;
